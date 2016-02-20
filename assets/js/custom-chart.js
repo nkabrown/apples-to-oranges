@@ -9,10 +9,9 @@ var data = [
   {label: 'Website F', value: 29.7}
 ];
 
-console.log(data);
-var margin = {top: 5, right: 0, bottom: 50, left: 25},
+var margin = {top: 25, right: 0, bottom: 50, left: 25},
     width = 308 - margin.right - margin.left,
-    height = 359 - margin.top - margin.bottom;
+    height = 379 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
@@ -26,7 +25,8 @@ var xAxis = d3.svg.axis()
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient('left');
+    .orient('left')
+    .ticks(15);
 
 var chart = d3.select('svg')
     .attr('width', width + margin.right + margin.left)
@@ -35,7 +35,7 @@ var chart = d3.select('svg')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 x.domain(data.map(function(d) { return d.label; }));
-y.domain([0, d3.max(data, function(d) { return d.value; })]);
+y.domain([0,70]);
 
 chart.append('g')
     .attr('class', 'x axis')
@@ -44,10 +44,15 @@ chart.append('g')
   .selectAll('text')
     .attr('x', 0)
     .attr('y', 10)
+    .attr('dy', '.35em')
     .attr('transform', 'rotate(-55)')
     .style('text-anchor', 'end');
 
 chart.append('g')
     .attr('class', 'y axis')
-    .call(yAxis);
-
+    .call(yAxis)
+  .append('text')
+    .attr('x', -25)
+    .attr('y', -23)
+    .attr('dy', '.71em')
+    .text('Sensitivity (true positive rate)');
