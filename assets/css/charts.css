@@ -1,0 +1,24 @@
+html,
+body {
+  background-color: #693bb0;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.chartjs {
+  width: 50%;
+  float: left;
+}
+
+.d3 {
+  width: 50%;
+  float: right;
+}
+
+canvas {
+  margin-left: 200px;
+  margin-top: 175px;
+}
