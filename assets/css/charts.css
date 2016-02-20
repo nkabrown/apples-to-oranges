@@ -22,3 +22,20 @@ canvas {
   margin-left: 200px;
   margin-top: 175px;
 }
+
+svg {
+  margin-top: 175px;
+}
+
+/* d3 chart */
+.axis {
+  fill: #fff;
+  stroke: #fff;
+  font-size: 12pt;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: none;
+}
