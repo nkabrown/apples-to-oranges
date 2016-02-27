@@ -9,24 +9,31 @@ var data = [
   {label: 'Website F', value: 29.7}
 ];
 
-var margin = {top: 25, right: 0, bottom: 50, left: 25},
+var margin = {top: 25, right: 0, bottom: 60, left: 25},
     width = 308 - margin.right - margin.left,
     height = 379 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
+    .rangeRoundBands([0, width], .28);
 
 var y = d3.scale.linear()
     .range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient('bottom');
+    .orient('bottom')
+    .ticks(5)
+    .innerTickSize(-height)
+    .outerTickSize(0)
+    .tickPadding(10);
 
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient('left')
-    .ticks(15);
+    .ticks(15)
+    .innerTickSize(-width)
+    .outerTickSize(0)
+    .tickPadding(10);
 
 var chart = d3.select('svg')
     .attr('width', width + margin.right + margin.left)
@@ -42,7 +49,7 @@ chart.append('g')
     .attr('transform', 'translate(0,' + height + ')')
     .call(xAxis)
   .selectAll('text')
-    .attr('x', 0)
+    .attr('x', -5)
     .attr('y', 10)
     .attr('dy', '.35em')
     .attr('transform', 'rotate(-55)')
@@ -56,3 +63,13 @@ chart.append('g')
     .attr('y', -23)
     .attr('dy', '.71em')
     .text('Sensitivity (true positive rate)');
+
+var bars = chart.selectAll('.bar')
+    .data(data)
+  .enter().append('rect')
+    .attr('class', 'bar')
+    .attr('y', function(d) { return y(d.value); })
+    .attr('height', function(d) { return height - y(d.value); })
+    .attr('x', function(d) { return x(d.label); })
+    .attr('width', x.rangeBand())
+    .style('fill', '#fff');

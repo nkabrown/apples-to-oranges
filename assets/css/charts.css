@@ -46,3 +46,7 @@ svg {
   fill: none;
   stroke: none;
 }
+
+.tick line {
+  stroke: #fff;
+}
